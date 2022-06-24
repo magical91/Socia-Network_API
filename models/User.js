@@ -1,8 +1,5 @@
 const { Schema, model } = require('mongoose');
-//const moment = require('moment');
 const opt = { toJSON: { virtuals: true, getters: true, id: false } };
-
-//const Thought = require('../models/thought');
 
 const UserSchema = new Schema({
     username: {
