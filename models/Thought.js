@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 const moment = require('moment');
 
-
 const ThoughtSchema = new Schema({
     thoughtText: {
         type: String,
@@ -29,7 +28,6 @@ const ThoughtSchema = new Schema({
         id: false
     }
 );
-
 
 ThoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
