@@ -4,10 +4,10 @@ const User = require('../models/User');
 const thoughtController = {
     getAllThoughts(req, res) {
         Thought.find({})
-            .populate({
-                path: 'user',
-                select: '-__v'
-            })
+            // .populate({
+            //     path: 'user',
+            //     select: '-__v'
+            // })
             .select('-__v')
             .sort({ _id: -1 })
             .then(dbThoughtData => res.json(dbThoughtData))
@@ -19,10 +19,10 @@ const thoughtController = {
 
     getThoughtById({ params }, res) {
         Thought.findOne({ _id: params.id })
-            .populate({
-                path: 'user',
-                select: '-__v'
-            })
+            // .populate({
+            //     path: 'user',
+            //     select: '-__v'
+            // })
             .select('-__v')
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
@@ -42,7 +42,7 @@ const thoughtController = {
             .then(({ _id }) => {
                 return User.findOneAndUpdate(
                     { username: body.username },
-                    { $addToSet: { thoughts: _id } },
+                    { $push: { thoughts: _id } },
                     { new: true }
                 );
             })
@@ -59,7 +59,7 @@ const thoughtController = {
     addReaction({ params, body }, res) {
         Thought.findOneAndUpdate(
             { _id: params.thoughtId },
-            { $addToSet: { reactions: body } },
+            { $push: { reactions: body } },
             { new: true }
         )
             .then(dbThoughtData => {
