@@ -19,6 +19,7 @@
   "homepage": "https://github.com/magical91/Social-Network_API#readme",
   "dependencies": {
     "express": "^4.18.1",
+    "moment": "^2.29.3",
     "mongoose": "^6.4.0"
   }
 }
