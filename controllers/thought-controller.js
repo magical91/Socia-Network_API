@@ -1,13 +1,12 @@
-const Thought = require('../models/Thought');
-const User = require('../models/User');
+const { User, Thought } = require('../models');
 
 const thoughtController = {
     getAllThoughts(req, res) {
         Thought.find({})
-            // .populate({
-            //     path: 'user',
-            //     select: '-__v'
-            // })
+            .populate({
+                path: 'reactions',
+                select: '-__v'
+            })
             .select('-__v')
             .sort({ _id: -1 })
             .then(dbThoughtData => res.json(dbThoughtData))
@@ -19,10 +18,10 @@ const thoughtController = {
 
     getThoughtById({ params }, res) {
         Thought.findOne({ _id: params.id })
-            // .populate({
-            //     path: 'user',
-            //     select: '-__v'
-            // })
+            .populate({
+                path: 'reactions',
+                select: '-__v'
+            })
             .select('-__v')
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
